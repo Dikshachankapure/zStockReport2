@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "stock.zstockreport.zstockreport",
+        "description": "Stock Report",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#zstockreport-Display",
+        "navigationComponentName": "stock.zstockreport",
+        "intentSemanticObject": "zstockreport",
+        "intentAction": "Display",
+        "html5ApplicationName": "zstockreport",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "46fe9fa0-afdb-4221-8712-fec85d1e8400-1555043785238"
+        ],
+        "contentPackages": [
+            "37e7742e-74da-42e1-878f-a6514a2ab3c4-1555043729371"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Stock Report",
+        "subtitle": "Demo",
+        "searchKeywords": "Stock Report,Demo",
+        "displayIconUrl": "sap-icon://cart-5",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

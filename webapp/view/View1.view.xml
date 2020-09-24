@@ -1,0 +1,287 @@
+<mvc:View controllerName="stock.zstockreport.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	<App id="app">
+		<pages>
+			<Page title="Stock Report" floatingFooter="true">
+				<content>
+					<Panel id="panel1" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Search" width="auto" class="sapUiResponsiveMargin">
+						<content>
+							<ToolbarSpacer/>
+							<layout:Grid defaultSpan="XL2 L3 M3 S12">
+								<layout:VerticalLayout>
+									<Label text="Currency Type:" required="true"/>
+									<Input type="Text" id="currntype" valueHelpRequest="_handleValueCurrencyType" suggestionItems="{/CurrencyType}" textFormatMode="Key"
+										showSuggestion="true" showValueHelp="true">
+										<suggestionItems>
+											<core:Item text="{currency}" key="{currency}"/>
+										</suggestionItems>
+									</Input>
+									<!--<Input width="200px" id="txtCurrencyType" showValueHelp="true" valueHelpRequest="openFragment1"/>-->
+								</layout:VerticalLayout>
+								<layout:VerticalLayout>
+									<Label text="Fiscal Year" required="true"/>
+									<ComboBox id="fiscalyr" change="OnSelect" selectedKey="0">
+										<items>
+											<core:Item text="Select" key="0"/>
+											<core:Item text="2015" key="1"/>
+											<core:Item text="2016" key="2"/>
+											<core:Item text="2016" key="3"/>
+											<core:Item text="2017" key="4"/>
+											<core:Item text="2018" key="5"/>
+											<core:Item text="2019" key="6"/>
+											<core:Item text="2020" key="7"/>
+										</items>
+									</ComboBox>
+								</layout:VerticalLayout>
+								<layout:VerticalLayout>
+									<RadioButtonGroup columns="2" width="500px" class="sapUiSmallMargin" select="OnSelect">
+										<buttons>
+											<RadioButton id="rdb1" text="Amount"/>
+											<RadioButton id="rdb2" text="Quantity"/>
+										</buttons>
+									</RadioButtonGroup>
+								</layout:VerticalLayout>
+								<layout:VerticalLayout>
+									<Label text=""/>
+									<Button type="Accept" press="onSearch" width="120px" icon="sap-icon://search" text="Serach" id="btnsearch"/>
+								</layout:VerticalLayout>
+							</layout:Grid>
+						</content>
+					</Panel>
+					<Panel id="panel2" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Stock Report" width="auto"
+						class="sapUiResponsiveMargin">
+						<Table id="table" class="sapUiResponsiveMargin" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" width="auto"
+							items="{oModelCompany>/CompanyData}" visible="false">
+							<columns>
+								<Column width="120px" visible="false">
+									<Text text="Type"/>
+								</Column>
+								<Column width="120px">
+									<Text text="Company"/>
+								</Column>
+								<Column>
+									<Text text="JAN"/>
+								</Column>
+								<Column>
+									<Text text="FEB"/>
+								</Column>
+								<Column>
+									<Text text="MAR"/>
+								</Column>
+								<Column>
+									<Text text="APR"/>
+								</Column>
+								<Column>
+									<Text text="MAY"/>
+								</Column>
+								<Column>
+									<Text text="JUNE"/>
+								</Column>
+								<Column>
+									<Text text="JULY"/>
+								</Column>
+								<Column>
+									<Text text="AUG"/>
+								</Column>
+								<Column>
+									<Text text="SEP"/>
+								</Column>
+								<Column>
+									<Text text="OCT"/>
+								</Column>
+								<Column>
+									<Text text="NOV"/>
+								</Column>
+								<Column>
+									<Text text="DEC"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive">
+									<cells>
+										<ObjectIdentifier title="{oModelCompany>Type}" visible="false"/>
+										<ObjectIdentifier title="{oModelCompany>Company}"/>
+										<Link text="{oModelCompany>JAN}" press="onPress"/>
+										<Link text="{oModelCompany>FEB}" press="onPress"/>
+										<Link text="{oModelCompany>MAR}" press="onPress"/>
+										<Link text="{oModelCompany>APR}" press="onPress"/>
+										<Link text="{oModelCompany>MAY}" press="onPress"/>
+										<Link text="{oModelCompany>JUNE}" press="onPress"/>
+										<Link text="{oModelCompany>JULY}" press="onPress"/>
+										<Link text="{oModelCompany>AUG}" press="onPress"/>
+										<Link text="{oModelCompany>SEP}" press="onPress"/>
+										<Link text="{oModelCompany>OCT}" press="onPress"/>
+										<Link text="{oModelCompany>NOV}" press="onPress"/>
+										<Link text="{oModelCompany>DEC}" press="onPress"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<Table id="qtytable" class="sapUiResponsiveMargin" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" width="auto"
+							items="{oModelQty>/Quantity}" visible="false">
+							<columns>
+								<Column width="120px" visible="false">
+									<Text text="Type"/>
+								</Column>
+								<Column width="120px">
+									<Text text="Company"/>
+								</Column>
+								<Column>
+									<Text text="JAN"/>
+								</Column>
+								<Column>
+									<Text text="FEB"/>
+								</Column>
+								<Column>
+									<Text text="MAR"/>
+								</Column>
+								<Column>
+									<Text text="APR"/>
+								</Column>
+								<Column>
+									<Text text="MAY"/>
+								</Column>
+								<Column>
+									<Text text="JUNE"/>
+								</Column>
+								<Column>
+									<Text text="JULY"/>
+								</Column>
+								<Column>
+									<Text text="AUG"/>
+								</Column>
+								<Column>
+									<Text text="SEP"/>
+								</Column>
+								<Column>
+									<Text text="OCT"/>
+								</Column>
+								<Column>
+									<Text text="NOV"/>
+								</Column>
+								<Column>
+									<Text text="DEC"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive">
+									<cells>
+										<ObjectIdentifier title="{oModelQty>Type}" visible="false"/>
+										<ObjectIdentifier title="{oModelQty>Company}"/>
+										<Link text="{oModelQty>JAN}" press="onPress"/>
+										<Link text="{oModelQty>FEB}" press="onPress"/>
+										<Link text="{oModelQty>MAR}" press="onPress"/>
+										<Link text="{oModelQty>APR}" press="onPress"/>
+										<Link text="{oModelQty>MAY}" press="onPress"/>
+										<Link text="{oModelQty>JUNE}" press="onPress"/>
+										<Link text="{oModelQty>JULY}" press="onPress"/>
+										<Link text="{oModelQty>AUG}" press="onPress"/>
+										<Link text="{oModelQty>SEP}" press="onPress"/>
+										<Link text="{oModelQty>OCT}" press="onPress"/>
+										<Link text="{oModelQty>NOV}" press="onPress"/>
+										<Link text="{oModelQty>DEC}" press="onPress"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</Panel>
+					<Panel id="settingsPanel" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Stock Report Chart" width="auto"
+						class="sapUiResponsiveMargin" visible="false">
+						<layout:FixFlex id="chartFixFlex" minFlexSize="450">
+							<layout:flexContent>
+								<viz:Popover id="idPopOver"/>
+								<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="100%" width="100%" vizType="line">
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{/ChartByAmount}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Company" value="{Company}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Jan" value="{Jan}"/>
+												<viz.data:MeasureDefinition name="Feb" value="{Feb}"/>
+												<viz.data:MeasureDefinition name="Mar" value="{Mar}"/>
+												<viz.data:MeasureDefinition name="Apr" value="{Apr}"/>
+												<viz.data:MeasureDefinition name="May" value="{May}"/>
+												<viz.data:MeasureDefinition name="Jun" value="{Jun}"/>
+												<viz.data:MeasureDefinition name="Jul" value="{Jul}"/>
+												<viz.data:MeasureDefinition name="Aug" value="{Aug}"/>
+												<viz.data:MeasureDefinition name="Sep" value="{Sep}"/>
+												<viz.data:MeasureDefinition name="Oct" value="{Oct}"/>
+												<viz.data:MeasureDefinition name="Nov" value="{Nov}"/>
+												<viz.data:MeasureDefinition name="Dec" value="{Dec}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jan"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Feb"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Mar"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Apr"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="May"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jun"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jul"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Aug"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Sep"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Oct"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Nov"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Dec"/>
+										<viz.feeds:FeedItem id="categoryAxisFeed1" uid="categoryAxis" type="Dimension" values="Company"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</layout:flexContent>
+						</layout:FixFlex>
+						</Panel>
+						
+							<Panel id="settingsPanelQTY" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Stock Report Chart" width="auto"
+						class="sapUiResponsiveMargin" visible="false">
+						<layout:FixFlex id="chartFixFlex1" minFlexSize="450">
+							<layout:flexContent>
+								<viz:Popover id="idPopOverQty"/>
+								<viz:VizFrame id="idVizFrameQty" uiConfig="{applicationSet:'fiori'}" height="100%" width="100%" vizType="line" >
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{/ChartByQTY}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Company" value="{Company}"/>
+											
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Jan" value="{Jan}"/>
+												<viz.data:MeasureDefinition name="Feb" value="{Feb}"/>
+												<viz.data:MeasureDefinition name="Mar" value="{Mar}"/>
+												<viz.data:MeasureDefinition name="Apr" value="{Apr}"/>
+												<viz.data:MeasureDefinition name="May" value="{May}"/>
+												<viz.data:MeasureDefinition name="Jun" value="{Jun}"/>
+												<viz.data:MeasureDefinition name="Jul" value="{Jul}"/>
+												<viz.data:MeasureDefinition name="Aug" value="{Aug}"/>
+												<viz.data:MeasureDefinition name="Sep" value="{Sep}"/>
+												<viz.data:MeasureDefinition name="Oct" value="{Oct}"/>
+												<viz.data:MeasureDefinition name="Nov" value="{Nov}"/>
+												<viz.data:MeasureDefinition name="Dec" value="{Dec}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jan"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Feb"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Mar"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Apr"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="May"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jun"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jul"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Aug"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Sep"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Oct"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Nov"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Dec"/>
+										<viz.feeds:FeedItem id="categoryAxisFeed11" uid="categoryAxis" type="Dimension" values="Company"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</layout:flexContent>
+						</layout:FixFlex>
+						</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

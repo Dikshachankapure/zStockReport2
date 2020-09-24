@@ -1,0 +1,241 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="stock.zstockreport.controller.storage"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.m.semantic" xmlns:layout="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Stock Report By Storage Location" showNavButton="true" navButtonPress="Gotopage1">
+				<content>
+					<ObjectHeader id="objcmp"/>
+					<Table id="table" class="sapUiResponsiveMargin" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" width="auto"
+						items="{oModelCompany>/CompanyData}" visible="false">
+						<columns>
+							<Column width="120px" visible="false">
+								<Text text="Type" />
+							</Column>
+							<Column width="120px">
+								<Text text="Storage Loaction"/>
+							</Column>
+							<Column>
+								<Text text="JAN"/>
+							</Column>
+							<Column>
+								<Text text="FEB"/>
+							</Column>
+							<Column>
+								<Text text="MAR"/>
+							</Column>
+							<Column>
+								<Text text="APR"/>
+							</Column>
+							<Column>
+								<Text text="MAY"/>
+							</Column>
+							<Column>
+								<Text text="JUNE"/>
+							</Column>
+							<Column>
+								<Text text="JULY"/>
+							</Column>
+							<Column>
+								<Text text="AUG"/>
+							</Column>
+							<Column>
+								<Text text="SEP"/>
+							</Column>
+							<Column>
+								<Text text="OCT"/>
+							</Column>
+							<Column>
+								<Text text="NOV"/>
+							</Column>
+							<Column>
+								<Text text="DEC"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive">
+								<cells>
+									<ObjectIdentifier title="{oModelCompany>Type}" id="typeA" visible="false"/>
+									<ObjectIdentifier title="{oModelCompany>StorageLoc}" id="strge1"/>
+									<Link text="{oModelCompany>JAN}" press="onPress" id="jan"/>
+									<Link text="{oModelCompany>FEB}" press="onPress" id="feb"/>
+									<Link text="{oModelCompany>MAR}" press="onPress" id="mar"/>
+									<Link text="{oModelCompany>APR}" press="onPress" id="apr"/>
+									<Link text="{oModelCompany>MAY}" press="onPress" id="may"/>
+									<Link text="{oModelCompany>JUNE}" press="onPress" id="june"/>
+									<Link text="{oModelCompany>JULY}" press="onPress" id="july"/>
+									<Link text="{oModelCompany>AUG}" press="onPress" id="aug"/>
+									<Link text="{oModelCompany>SEP}" press="onPress" id="sept"/>
+									<Link text="{oModelCompany>OCT}" press="onPress" id="oct"/>
+									<Link text="{oModelCompany>NOV}" press="onPress" id="nov"/>
+									<Link text="{oModelCompany>DEC}" press="onPress" id="dec"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Table id="qtytable" class="sapUiResponsiveMargin" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" width="auto"
+						items="{oModelQty>/Quantity}" visible="false">
+						<columns>
+								<Column width="120px"  visible="false">
+								<Text text="Type" />
+							</Column>
+							<Column width="120px">
+								<Text text="Company"/>
+							</Column>
+							<Column>
+								<Text text="JAN"/>
+							</Column>
+							<Column>
+								<Text text="FEB"/>
+							</Column>
+							<Column>
+								<Text text="MAR"/>
+							</Column>
+							<Column>
+								<Text text="APR"/>
+							</Column>
+							<Column>
+								<Text text="MAY"/>
+							</Column>
+							<Column>
+								<Text text="JUNE"/>
+							</Column>
+							<Column>
+								<Text text="JULY"/>
+							</Column>
+							<Column>
+								<Text text="AUG"/>
+							</Column>
+							<Column>
+								<Text text="SEP"/>
+							</Column>
+							<Column>
+								<Text text="OCT"/>
+							</Column>
+							<Column>
+								<Text text="NOV"/>
+							</Column>
+							<Column>
+								<Text text="DEC"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive">
+								<cells>
+									<ObjectIdentifier title="{oModelQty>Type}"  visible="false" id="typeB"/>
+									<ObjectIdentifier title="{oModelQty>StorageLoc}"/>
+									<Link text="{oModelQty>JAN}" press="onPress"/>
+									<Link text="{oModelQty>FEB}" press="onPress"/>
+									<Link text="{oModelQty>MAR}" press="onPress"/>
+									<Link text="{oModelQty>APR}" press="onPress"/>
+									<Link text="{oModelQty>MAY}" press="onPress"/>
+									<Link text="{oModelQty>JUNE}" press="onPress"/>
+									<Link text="{oModelQty>JULY}" press="onPress"/>
+									<Link text="{oModelQty>AUG}" press="onPress"/>
+									<Link text="{oModelQty>SEP}" press="onPress"/>
+									<Link text="{oModelQty>OCT}" press="onPress"/>
+									<Link text="{oModelQty>NOV}" press="onPress"/>
+									<Link text="{oModelQty>DEC}" press="onPress"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Panel id="settingsPanel" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Stock Report Chart" width="auto"
+						class="sapUiResponsiveMargin" visible="false">
+						<layout:FixFlex id="chartFixFlex" minFlexSize="350">
+							<layout:flexContent>
+								<viz:Popover id="idPopOver"/>
+								<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="100%" width="100%" vizType="line">
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{/ChartByAmount}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Storage" value="{Storage}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Jan" value="{Jan}"/>
+												<viz.data:MeasureDefinition name="Feb" value="{Feb}"/>
+												<viz.data:MeasureDefinition name="Mar" value="{Mar}"/>
+												<viz.data:MeasureDefinition name="Apr" value="{Apr}"/>
+												<viz.data:MeasureDefinition name="May" value="{May}"/>
+												<viz.data:MeasureDefinition name="Jun" value="{Jun}"/>
+												<viz.data:MeasureDefinition name="Jul" value="{Jul}"/>
+												<viz.data:MeasureDefinition name="Aug" value="{Aug}"/>
+												<viz.data:MeasureDefinition name="Sep" value="{Sep}"/>
+												<viz.data:MeasureDefinition name="Oct" value="{Oct}"/>
+												<viz.data:MeasureDefinition name="Nov" value="{Nov}"/>
+												<viz.data:MeasureDefinition name="Dec" value="{Dec}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jan"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Feb"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Mar"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Apr"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="May"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jun"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jul"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Aug"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Sep"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Oct"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Nov"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Dec"/>
+										<viz.feeds:FeedItem id="categoryAxisFeed1" uid="categoryAxis" type="Dimension" values="Storage"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</layout:flexContent>
+						</layout:FixFlex>
+						</Panel>
+						
+							<Panel id="settingsPanelQTY" busyIndicatorDelay="0" expandable="true" expanded="true" headerText="Stock Report Chart" width="auto"
+						class="sapUiResponsiveMargin" visible="false">
+						<layout:FixFlex id="chartFixFlex1" minFlexSize="250">
+							<layout:flexContent>
+								<viz:Popover id="idPopOverQty"/>
+								<viz:VizFrame id="idVizFrameQty" uiConfig="{applicationSet:'fiori'}" height="100%" width="100%" vizType="line" >
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{/ChartByQTY}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Storage" value="{Storage}"/>
+											
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Jan" value="{Jan}"/>
+												<viz.data:MeasureDefinition name="Feb" value="{Feb}"/>
+												<viz.data:MeasureDefinition name="Mar" value="{Mar}"/>
+												<viz.data:MeasureDefinition name="Apr" value="{Apr}"/>
+												<viz.data:MeasureDefinition name="May" value="{May}"/>
+												<viz.data:MeasureDefinition name="Jun" value="{Jun}"/>
+												<viz.data:MeasureDefinition name="Jul" value="{Jul}"/>
+												<viz.data:MeasureDefinition name="Aug" value="{Aug}"/>
+												<viz.data:MeasureDefinition name="Sep" value="{Sep}"/>
+												<viz.data:MeasureDefinition name="Oct" value="{Oct}"/>
+												<viz.data:MeasureDefinition name="Nov" value="{Nov}"/>
+												<viz.data:MeasureDefinition name="Dec" value="{Dec}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jan"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Feb"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Mar"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Apr"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="May"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jun"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Jul"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Aug"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Sep"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Oct"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Nov"/>
+										<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Dec"/>
+										<viz.feeds:FeedItem id="categoryAxisFeed11" uid="categoryAxis" type="Dimension" values="Storage"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</layout:flexContent>
+						</layout:FixFlex>
+						</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,14 @@
+{
+	"CurrencyType": [{
+	
+		"currency": "INR"
+        
+    },{
+    	"currency": "USD"
+        
+    },{
+    	"currency": "EUR"
+        
+    }]
+    
+ }

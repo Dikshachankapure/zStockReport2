@@ -1,0 +1,159 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "stock.zstockreport",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "stock.zstockreport.view.View1",
+			"type": "XML",
+			"async": true,
+			"id": "View1"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "stock.zstockreport.i18n.i18n"
+				}
+			},
+			"CurrencyDataSet": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "jsondata/currency.json"
+			},
+			"CompanyDataSet": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "jsondata/company.json"
+			},
+			"QuantitySet": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "jsondata/quantity.json"
+			},
+			"ChartDataSet": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "jsondata/chart.json"
+			},
+			"StorageChartDataSet": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "jsondata/storagechart.json"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "stock.zstockreport.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "RouteView1",
+					"pattern": "RouteView1",
+					"target": [
+						"TargetView1"
+					]
+				},
+				{
+					"name": "storage",
+					"pattern": "storage/{Company},{Type}",
+					"target": [
+						"Storage"
+					]
+				},
+				{
+					"name": "Storage",
+					"pattern": "storage",
+					"target": [
+						"storage"
+					]
+				},
+				{
+					"name": "material",
+					"pattern": "material/{StorageLoc},{Type}",
+					"target": [
+						"Material"
+					]
+				}
+			],
+			"targets": {
+				"TargetView1": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "View1"
+				},
+				"Storage": {
+					"viewType": "XML",
+					"viewName": "storage"
+				},
+				"storage": {
+					"viewType": "XML",
+					"viewName": "storage"
+				},
+				"Material": {
+					"viewType": "XML",
+					"viewName": "material"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}
